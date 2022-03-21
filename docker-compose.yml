@@ -1,0 +1,18 @@
+version: "3.4"
+services:
+  golang:
+    tty: true
+    image: golang:1.16
+    volumes:
+      - .:/app/src/service/api
+    working_dir: /app/src/service/api
+    command: bash -c "go get -u github.com/cosmtrek/air && air -c
+      /app/src/service/api/air.toml ."
+    expose:
+      - 8088
+    ports:
+      - 8088:8088
+    env_file:
+      - .env
+volumes:
+  data: null
